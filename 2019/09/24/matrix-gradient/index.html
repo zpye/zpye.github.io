@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="本文主要分析神经网络中隐层导数的计算，其主要部分是一个矩阵乘法表达式（这里需要求导的变量是矩阵$A$和向量$b$）：  y=Ax+b">
+<meta name="description" content="本文主要分析神经网络中隐层导数的计算，其主要部分是一个矩阵乘法与向量加法的表达式（这里需要求导的变量是矩阵$A$和向量$b$）：  y=Ax+b">
 <meta name="keywords" content="linear algebra,neural networks">
 <meta property="og:type" content="article">
-<meta property="og:title" content="神经网络中的矩阵计算求导">
+<meta property="og:title" content="神经网络中隐层的导数计算">
 <meta property="og:url" content="https://zpye.github.io/2019/09/24/matrix-gradient/index.html">
 <meta property="og:site_name" content="zpye&#39;s blog">
-<meta property="og:description" content="本文主要分析神经网络中隐层导数的计算，其主要部分是一个矩阵乘法表达式（这里需要求导的变量是矩阵$A$和向量$b$）：  y=Ax+b">
+<meta property="og:description" content="本文主要分析神经网络中隐层导数的计算，其主要部分是一个矩阵乘法与向量加法的表达式（这里需要求导的变量是矩阵$A$和向量$b$）：  y=Ax+b">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2019-09-23T16:58:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="神经网络中的矩阵计算求导">
-<meta name="twitter:description" content="本文主要分析神经网络中隐层导数的计算，其主要部分是一个矩阵乘法表达式（这里需要求导的变量是矩阵$A$和向量$b$）：  y=Ax+b">
+<meta name="twitter:title" content="神经网络中隐层的导数计算">
+<meta name="twitter:description" content="本文主要分析神经网络中隐层导数的计算，其主要部分是一个矩阵乘法与向量加法的表达式（这里需要求导的变量是矩阵$A$和向量$b$）：  y=Ax+b">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>神经网络中的矩阵计算求导 | zpye's blog</title>
+  <title>神经网络中隐层的导数计算 | zpye's blog</title>
   
 
 
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">神经网络中的矩阵计算求导</h1>
+          <h1 class="post-title" itemprop="name headline">神经网络中隐层的导数计算</h1>
         
 
         <div class="post-meta">
@@ -312,7 +312,7 @@
       
 
       
-        <p>本文主要分析神经网络中隐层导数的计算，其主要部分是一个矩阵乘法表达式（这里需要求导的变量是矩阵$A$和向量$b$）：</p>
+        <p>本文主要分析神经网络中隐层导数的计算，其主要部分是一个矩阵乘法与向量加法的表达式（这里需要求导的变量是矩阵$A$和向量$b$）：</p>
 <script type="math/tex; mode=display">
 y=Ax+b</script><a id="more"></a>
 <p>首先对等式两边进行微分：</p>
