@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="neural networks,linear algebra,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -79,18 +79,16 @@
 
 
 
-<meta name="description" content="本文主要分析神经网络中交叉熵导数的计算，其表达式为：  l=-y^Tlog(x),\quad x\in \mathbb{R}^n,y\in\{0,1\}^n,\vec{1}^Ty=y^T\vec{1}=1">
-<meta name="keywords" content="neural networks,linear algebra">
-<meta property="og:type" content="article">
-<meta property="og:title" content="神经网络中的交叉熵的导数计算">
-<meta property="og:url" content="https://zpye.github.io/2019/09/24/cross-entropy/index.html">
+<meta name="description" content="Inspirations and summaries from work and study.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="zpye&#39;s blog">
+<meta property="og:url" content="https://zpye.github.io/tags/OpenGL/index.html">
 <meta property="og:site_name" content="zpye&#39;s blog">
-<meta property="og:description" content="本文主要分析神经网络中交叉熵导数的计算，其表达式为：  l=-y^Tlog(x),\quad x\in \mathbb{R}^n,y\in\{0,1\}^n,\vec{1}^Ty=y^T\vec{1}=1">
+<meta property="og:description" content="Inspirations and summaries from work and study.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-23T17:38:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="神经网络中的交叉熵的导数计算">
-<meta name="twitter:description" content="本文主要分析神经网络中交叉熵导数的计算，其表达式为：  l=-y^Tlog(x),\quad x\in \mathbb{R}^n,y\in\{0,1\}^n,\vec{1}^Ty=y^T\vec{1}=1">
+<meta name="twitter:title" content="zpye&#39;s blog">
+<meta name="twitter:description" content="Inspirations and summaries from work and study.">
 
 
 
@@ -120,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="https://zpye.github.io/2019/09/24/cross-entropy/">
+  <link rel="canonical" href="https://zpye.github.io/tags/OpenGL/">
 
 
 
 
 
-  <title>神经网络中的交叉熵的导数计算 | zpye's blog</title>
+  <title>Tag: OpenGL | zpye's blog</title>
   
 
 
@@ -145,7 +143,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -219,194 +217,52 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block tag">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>OpenGL<small>Tag</small>
+        </h1>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zpye.github.io/2019/09/24/cross-entropy/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zpye">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zpye's blog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2019/09/30/opengl-development/" itemprop="url">
+              
+                <span itemprop="name">OpenGL开发环境配置</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">神经网络中的交叉熵的导数计算</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-24T01:38:05+08:00">
-                2019-09-24
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-09-30T22:49:57+08:00" content="2019-09-30">
+          09-30
+        </time>
+      </div>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Post modified&#58;</span>
-              
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-24T01:38:05+08:00">
-                2019-09-24
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>本文主要分析神经网络中交叉熵导数的计算，其表达式为：</p>
-<script type="math/tex; mode=display">
-l=-y^Tlog(x),\quad x\in \mathbb{R}^n,y\in\{0,1\}^n,\vec{1}^Ty=y^T\vec{1}=1</script><a id="more"></a>
-<p>等式两边同时微分可得：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-dl&=-y^Td(log(x)) \\
-&=-y^Tdiag(x)^{-1}dx
-\end{aligned}</script><p>这里用到了公式：</p>
-<script type="math/tex; mode=display">
-d(log(x))=x^{\circ -1}\circ dx=diag(x^{\circ -1})dx=diag(x)^{-1}dx</script><p>与之前softmax的结果进行合并：</p>
-<script type="math/tex; mode=display">
-l=-y^Tlog(a),\quad a=softmax(x)=\frac{exp(x)}{\vec{1}^Texp(x)}</script><p>求微分可得：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-dl&=-y^Tdiag(a)^{-1}da \\
-&=-y^Tdiag(a)^{-1}(diag(a)-aa^T)dx \\
-&=-y^T(I-diag(a)^{-1}aa^T)dx \\
-&=-y^T(I-\vec{1}a^T)dx \\
-&=(y^T\vec{1}a^T-y^T)dx \\
-&=(a^T-y^T)dx \\
-&=(a-y)^Tdx
-\end{aligned}</script><p>根据微分与梯度对应关系可知：</p>
-<script type="math/tex; mode=display">
-\frac{\partial l}{\partial x^T}=(a-y)^T</script><p>最终结果：</p>
-<script type="math/tex; mode=display">
-\frac{\partial l}{\partial x}=a-y</script><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
-<li>矩阵求导术（上）<a href="https://zhuanlan.zhihu.com/p/24709748" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/24709748</a></li>
-<li>矩阵求导术（下）<a href="https://zhuanlan.zhihu.com/p/24863977" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/24863977</a></li>
-</ul>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/neural-networks/" rel="tag"># neural networks</a>
-          
-            <a href="/tags/linear-algebra/" rel="tag"># linear algebra</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/09/24/softmax-gradient/" rel="next" title="神经网络中softmax的导数计算">
-                <i class="fa fa-chevron-left"></i> 神经网络中softmax的导数计算
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/24/cross-softmax/" rel="prev" title="神经网络中softmax与交叉熵合并后的导数计算">
-                神经网络中softmax与交叉熵合并后的导数计算 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
       
     </div>
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -414,10 +270,6 @@ dl&=-y^Tdiag(a)^{-1}da \\
 
 
           
-
-  
-
-
 
         </div>
         
@@ -438,17 +290,8 @@ dl&=-y^Tdiag(a)^{-1}da \\
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -499,22 +342,6 @@ dl&=-y^Tdiag(a)^{-1}da \\
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -655,10 +482,6 @@ dl&=-y^Tdiag(a)^{-1}da \\
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
