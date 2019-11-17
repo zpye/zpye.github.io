@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="geometry,">
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="Inspirations and summaries from work and study.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zpye&#39;s blog">
-<meta property="og:url" content="https://zpye.github.io/tags/linear-algebra/index.html">
+<meta name="description" content="本文讨论的问题是关于三维空间中坐标变换与矩阵左乘右乘的关系。 首先定义三维坐标的变换：  q=Ap其中$p$,$q$为三维向量，$A$为$3\times 3$矩阵。">
+<meta name="keywords" content="geometry">
+<meta property="og:type" content="article">
+<meta property="og:title" content="坐标变换中的左乘与右乘">
+<meta property="og:url" content="https://zpye.github.io/2019/11/17/transform/index.html">
 <meta property="og:site_name" content="zpye&#39;s blog">
-<meta property="og:description" content="Inspirations and summaries from work and study.">
+<meta property="og:description" content="本文讨论的问题是关于三维空间中坐标变换与矩阵左乘右乘的关系。 首先定义三维坐标的变换：  q=Ap其中$p$,$q$为三维向量，$A$为$3\times 3$矩阵。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-11-17T12:36:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zpye&#39;s blog">
-<meta name="twitter:description" content="Inspirations and summaries from work and study.">
+<meta name="twitter:title" content="坐标变换中的左乘与右乘">
+<meta name="twitter:description" content="本文讨论的问题是关于三维空间中坐标变换与矩阵左乘右乘的关系。 首先定义三维坐标的变换：  q=Ap其中$p$,$q$为三维向量，$A$为$3\times 3$矩阵。">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://zpye.github.io/tags/linear-algebra/">
+  <link rel="canonical" href="https://zpye.github.io/2019/11/17/transform/">
 
 
 
 
 
-  <title>Tag: linear algebra | zpye's blog</title>
+  <title>坐标变换中的左乘与右乘 | zpye's blog</title>
   
 
 
@@ -143,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -217,130 +219,183 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>linear algebra<small>Tag</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zpye.github.io/2019/11/17/transform/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zpye">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zpye's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/09/24/cross-softmax/" itemprop="url">
-              
-                <span itemprop="name">神经网络中softmax与交叉熵合并后的导数计算</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">坐标变换中的左乘与右乘</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-24T01:46:11+08:00" content="2019-09-24">
-          09-24
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-17T20:36:50+08:00">
+                2019-11-17
+              </time>
+            
 
-    </header>
-  </article>
+            
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-11-17T20:36:50+08:00">
+                2019-11-17
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/09/24/cross-entropy/" itemprop="url">
-              
-                <span itemprop="name">神经网络中的交叉熵的导数计算</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-24T01:38:05+08:00" content="2019-09-24">
-          09-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/09/24/softmax-gradient/" itemprop="url">
-              
-                <span itemprop="name">神经网络中softmax的导数计算</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-24T01:31:38+08:00" content="2019-09-24">
-          09-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/09/24/matrix-gradient/" itemprop="url">
-              
-                <span itemprop="name">神经网络中隐层的导数计算</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-24T00:58:12+08:00" content="2019-09-24">
-          09-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>本文讨论的问题是关于三维空间中坐标变换与矩阵左乘右乘的关系。</p>
+<p>首先定义三维坐标的变换：</p>
+<script type="math/tex; mode=display">
+q=Ap</script><p>其中$p$,$q$为三维向量，$A$为$3\times 3$矩阵。</p>
+<a id="more"></a>
+<p>坐标变换也可以表示为坐标系的变换，例如选取同一个坐标在两个坐标系下的表示：</p>
+<script type="math/tex; mode=display">
+q=Ap_A=Bp_B</script><p>其中$A$和$B$的每一列可以看作是坐标系的一个轴，那么$p_A$和$p_B$列向量上的每个数值就可以看作是同一个向量在不同坐标轴上度量的结果。令矩阵$M$为坐标系$A$在坐标系$B$下的表示，有：</p>
+<script type="math/tex; mode=display">
+A=BM</script><p>带入上式可得：</p>
+<script type="math/tex; mode=display">
+BMp_A=Bp_B</script><p>又向量在坐标系下表示是唯一的，有：</p>
+<script type="math/tex; mode=display">
+Mp_A=p_B</script><p>相当于通过左乘矩阵$M$将坐标从坐标系$A$转换到坐标系$B$。这样就找到了坐标变换和坐标系变换之间的关系。</p>
+<p>现在假设有多个坐标系$A_0,A_1,A_2,…,A_n$，存在以下表示关系：</p>
+<script type="math/tex; mode=display">
+A_1=A_0M_0 \\
+A_2=A_1M_1 \\
+... \\
+A_n=A_{n-1}M_{n-1}</script><p>即已知每个坐标系在前一个坐标系下的表示，可导出：</p>
+<script type="math/tex; mode=display">
+A_n=A_0M_0M_1...M_{n-1}</script><p>坐标之间的关系为：</p>
+<script type="math/tex; mode=display">
+M_0M_1...M_{n-1}p_n=p_0</script><p>以上的变换关系可以看作是已知坐标系之间的相对运动轨迹，将当前坐标系的坐标转换到起始坐标系上。</p>
+<p>这里的变换矩阵是按照右乘的方式进行累积的，但最后用于变换时还是左乘在向量上。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/geometry/" rel="tag"># geometry</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/30/opengl-development/" rel="next" title="OpenGL开发环境配置">
+                <i class="fa fa-chevron-left"></i> OpenGL开发环境配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -348,6 +403,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -560,6 +619,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
