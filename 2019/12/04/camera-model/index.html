@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="neural networks,linear algebra,">
+  <meta name="keywords" content="OpenCV,OpenGL,">
 
 
 
@@ -79,18 +79,23 @@
 
 
 
-<meta name="description" content="本文主要分析神经网络中将softmax层和交叉熵损失函数合并后导数的计算，过程上会简单许多：  l=-y^Tlog(a),\quad a=softmax(x)=\frac{exp(x)}{\vec{1}^Texp(x)} \\ l=-y^Tlog(\frac{exp(x)}{\vec{1}^Texp(x)})">
-<meta name="keywords" content="neural networks,linear algebra">
+<meta name="description" content="本文主要分析OpenCV与OpenGL中的摄像机投影模型。">
+<meta name="keywords" content="OpenCV,OpenGL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="神经网络中softmax与交叉熵合并后的导数计算">
-<meta property="og:url" content="https://zpye.github.io/2019/09/24/cross-softmax/index.html">
+<meta property="og:title" content="OpenCV与OpenGL中的摄像机投影模型">
+<meta property="og:url" content="https://zpye.github.io/2019/12/04/camera-model/index.html">
 <meta property="og:site_name" content="zpye&#39;s blog">
-<meta property="og:description" content="本文主要分析神经网络中将softmax层和交叉熵损失函数合并后导数的计算，过程上会简单许多：  l=-y^Tlog(a),\quad a=softmax(x)=\frac{exp(x)}{\vec{1}^Texp(x)} \\ l=-y^Tlog(\frac{exp(x)}{\vec{1}^Texp(x)})">
+<meta property="og:description" content="本文主要分析OpenCV与OpenGL中的摄像机投影模型。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-23T17:46:11.000Z">
+<meta property="og:image" content="https://docs.opencv.org/4.1.2/pinhole_camera_model.png">
+<meta property="og:image" content="https://learnopengl-cn.github.io/img/01/08/coordinate_systems.png">
+<meta property="og:image" content="https://learnopengl-cn.github.io/img/01/08/perspective_frustum.png">
+<meta property="og:image" content="http://www.songho.ca/opengl/files/gl_projectionmatrix01.png">
+<meta property="og:updated_time" content="2019-12-03T16:58:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="神经网络中softmax与交叉熵合并后的导数计算">
-<meta name="twitter:description" content="本文主要分析神经网络中将softmax层和交叉熵损失函数合并后导数的计算，过程上会简单许多：  l=-y^Tlog(a),\quad a=softmax(x)=\frac{exp(x)}{\vec{1}^Texp(x)} \\ l=-y^Tlog(\frac{exp(x)}{\vec{1}^Texp(x)})">
+<meta name="twitter:title" content="OpenCV与OpenGL中的摄像机投影模型">
+<meta name="twitter:description" content="本文主要分析OpenCV与OpenGL中的摄像机投影模型。">
+<meta name="twitter:image" content="https://docs.opencv.org/4.1.2/pinhole_camera_model.png">
 
 
 
@@ -120,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="https://zpye.github.io/2019/09/24/cross-softmax/">
+  <link rel="canonical" href="https://zpye.github.io/2019/12/04/camera-model/">
 
 
 
 
 
-  <title>神经网络中softmax与交叉熵合并后的导数计算 | zpye's blog</title>
+  <title>OpenCV与OpenGL中的摄像机投影模型 | zpye's blog</title>
   
 
 
@@ -233,7 +238,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zpye.github.io/2019/09/24/cross-softmax/">
+    <link itemprop="mainEntityOfPage" href="https://zpye.github.io/2019/12/04/camera-model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zpye">
@@ -250,7 +255,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">神经网络中softmax与交叉熵合并后的导数计算</h1>
+          <h1 class="post-title" itemprop="name headline">OpenCV与OpenGL中的摄像机投影模型</h1>
         
 
         <div class="post-meta">
@@ -262,8 +267,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-24T01:46:11+08:00">
-                2019-09-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-04T00:58:23+08:00">
+                2019-12-04
               </time>
             
 
@@ -278,8 +283,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-24T01:46:11+08:00">
-                2019-09-24
+              <time title="Post modified" itemprop="dateModified" datetime="2019-12-04T00:58:23+08:00">
+                2019-12-04
               </time>
             
           </span>
@@ -312,30 +317,38 @@
       
 
       
-        <p>本文主要分析神经网络中将softmax层和交叉熵损失函数合并后导数的计算，过程上会简单许多：</p>
+        <p>本文主要分析OpenCV与OpenGL中的摄像机投影模型。</p>
+<a id="more"></a>
+<h2 id="1-OpenCV的摄像机投影模型"><a href="#1-OpenCV的摄像机投影模型" class="headerlink" title="1. OpenCV的摄像机投影模型"></a>1. OpenCV的摄像机投影模型</h2><p><img src="https://docs.opencv.org/4.1.2/pinhole_camera_model.png" alt="https://docs.opencv.org/4.1.2/pinhole_camera_model.png"></p>
+<p>投影过程是将三维空间中世界坐标系下的坐标点变换到摄像机坐标系之后，通过归一化Z轴坐标将所有点映射到归一化平面上，自由度由3降为2。摄像机的内参矩阵则建立了归一化平面到图像坐标的对应关系，将坐标原点移到了左上角，并且根据图像的分辨率将连续空间的坐标与离散的像素坐标关联起来。</p>
+<p>使用公式来表示OpenCV中的投影过程：</p>
 <script type="math/tex; mode=display">
-l=-y^Tlog(a),\quad a=softmax(x)=\frac{exp(x)}{\vec{1}^Texp(x)} \\
-l=-y^Tlog(\frac{exp(x)}{\vec{1}^Texp(x)})</script><a id="more"></a>
-<p>首先，该表达式可以化简为：</p>
+s\begin{bmatrix}u\\v\\1\end{bmatrix}=\begin{bmatrix}f_x&0&c_x\\0&f_y&c_y\\0&0&1\end{bmatrix}\begin{bmatrix}r_{11}&r_{12}&r_{13}&t_1\\r_{21}&r_{22}&r_{23}&t_2\\r_{31}&r_{32}&r_{33}&t_3\end{bmatrix}\begin{bmatrix}X\\Y\\Z\\1\end{bmatrix}</script><p>其中$(X,Y,Z)$为世界坐标系下的三维空间坐标，$(u,v)$为投影后的像素坐标，$(f_x,f_y)$为以像素为单位的焦距，$(c_x,c_y)$为主点，通常在图像中心，$r_{xx}$为旋转矩阵的元素，$t_x$为平移向量，这二者可表示为变换矩阵$[R|t]$。</p>
+<p>采用非齐次坐标表达：</p>
 <script type="math/tex; mode=display">
-\begin{aligned}
-l&=-y^T(log(exp(x))-log(\vec{1}^Texp(x))\vec{1}) \\
-&=log(\vec{1}^Texp(x))y^T\vec{1}-y^Tx \\
-&=log(\vec{1}^Texp(x))-y^Tx
-\end{aligned}</script><p>等式两边求微分可得：</p>
+\begin{bmatrix}x\\y\\z\end{bmatrix}=R\begin{bmatrix}X\\Y\\Z\\1\end{bmatrix}+t\\
+x'=x/z\\
+y'=y/z\\
+u=f_x\times x'+c_x\\
+v=f_y\times y'+c_y</script><h2 id="2-OpenGL中的摄像机投影模型"><a href="#2-OpenGL中的摄像机投影模型" class="headerlink" title="2. OpenGL中的摄像机投影模型"></a>2. OpenGL中的摄像机投影模型</h2><p><img src="https://learnopengl-cn.github.io/img/01/08/coordinate_systems.png" alt="https://learnopengl-cn.github.io/img/01/08/coordinate_systems.png"></p>
+<p>OpenGL中的投影与OpenCV类似，不同之处在于归一化时采用了裁剪空间的设定，只对摄像机前方的一部分区域渲染，其他区域中的内容会舍弃。</p>
+<p><img src="https://learnopengl-cn.github.io/img/01/08/perspective_frustum.png" alt="https://learnopengl-cn.github.io/img/01/08/perspective_frustum.png"></p>
+<p>裁剪空间的构成是由摄像机的FOV，以及远、近两个平面围成的，其中FOV在$x,y$两个方向上通常会不同，需要两个数值$fovx$和$fovy$来表示，或者提供FOV和一个宽高比例。</p>
+<p><img src="http://www.songho.ca/opengl/files/gl_projectionmatrix01.png" alt="http://www.songho.ca/opengl/files/gl_projectionmatrix01.png"></p>
+<p>归一化的过程是将裁剪空间的区域映射到一个标准化的坐标空间，该空间是一个立方体，所有顶点的在每个轴上的坐标均为1或-1。变换之后可以比较方便的筛选需要渲染的坐标，也就是判断是否处于立方体内部。</p>
+<p>该变换由一个线性变换完成，其表示如下：</p>
 <script type="math/tex; mode=display">
-\begin{aligned}
-dl&=\frac{1}{\vec{1}^Texp(x)}\vec{1}^Td(exp(x))-y^Tdx \\
-&=\frac{1}{\vec{1}^Texp(x)}\vec{1}^T(exp(x)\circ dx)-y^Tdx \\
-&=\frac{exp(x)^T}{\vec{1}^Texp(x)}dx-y^Tdx \\
-&=(a^T-y^T)dx \\
-&=(a-y)^Tdx
-\end{aligned}</script><p>与之前结果相同：</p>
+\begin{bmatrix}X_c\\Y_c\\Z_c\\W_c\end{bmatrix}=\begin{bmatrix}\frac{1}{tan(fovx/2)}&0&0&0\\0&\frac{1}{tan(fovy/2)}&0&0\\0&0&-\frac{f+n}{f-n}&-\frac{2fn}{f-n}\\0&0&-1&0\end{bmatrix}\begin{bmatrix}X_e\\Y_e\\Z_e\\1\end{bmatrix}</script><p>其中$f,n$分别代表远、近平面的距离，$(X_e,Y_e,Z_e,1)$为摄像机坐标系下的齐次坐标，$(X_c,Y_c,Z_c,W_c)$为裁剪空间下的齐次坐标，归一化后的结果$(X_n,Y_n,Z_n)=(X_c/W_c,Y_c/W_c,Z_c/W_c)$。</p>
+<p>从变换公式来看，有：</p>
 <script type="math/tex; mode=display">
-\frac{\partial l}{\partial x}=a-y</script><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
-<li>矩阵求导术（上）<a href="https://zhuanlan.zhihu.com/p/24709748" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/24709748</a></li>
-<li>矩阵求导术（下）<a href="https://zhuanlan.zhihu.com/p/24863977" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/24863977</a></li>
-</ul>
+W_c=-Z_e\\
+X_n=-\frac{1}{tan(fovx/2)}\frac{X_e}{Z_e}\\
+Y_n=-\frac{1}{tan(fovy/2)}\frac{Y_e}{Z_e}</script><p>该表达式与OpenCV中归一化到单位平面的过程有相似之处，除了要乘上一个系数。</p>
+<p>从归一化坐标到图像像素坐标的变换与OpenCV中相同，需要放缩和平移。这里先不考虑$Z_n$，因为最终的投影结果是二维的，只与$X_n,Y_n$有关，而$Z_n$的主要用处是判断是否渲染以及判断遮挡。需要注意的是标准化坐标空间的Y轴是朝上的，而OpenCV中的Y轴是朝下的。</p>
+<h2 id="引用图片"><a href="#引用图片" class="headerlink" title="引用图片"></a>引用图片</h2><p><a href="https://docs.opencv.org/4.1.2/pinhole_camera_model.png" target="_blank" rel="noopener">https://docs.opencv.org/4.1.2/pinhole_camera_model.png</a></p>
+<p><a href="https://learnopengl-cn.github.io/img/01/08/coordinate_systems.png" target="_blank" rel="noopener">https://learnopengl-cn.github.io/img/01/08/coordinate_systems.png</a></p>
+<p><a href="https://learnopengl-cn.github.io/img/01/08/perspective_frustum.png" target="_blank" rel="noopener">https://learnopengl-cn.github.io/img/01/08/perspective_frustum.png</a></p>
+<p><a href="http://www.songho.ca/opengl/files/gl_projectionmatrix01.png" target="_blank" rel="noopener">http://www.songho.ca/opengl/files/gl_projectionmatrix01.png</a></p>
 
       
     </div>
@@ -353,9 +366,9 @@ dl&=\frac{1}{\vec{1}^Texp(x)}\vec{1}^Td(exp(x))-y^Tdx \\
       
         <div class="post-tags">
           
-            <a href="/tags/neural-networks/" rel="tag"># neural networks</a>
+            <a href="/tags/OpenCV/" rel="tag"># OpenCV</a>
           
-            <a href="/tags/linear-algebra/" rel="tag"># linear algebra</a>
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
           
         </div>
       
@@ -368,8 +381,8 @@ dl&=\frac{1}{\vec{1}^Texp(x)}\vec{1}^Td(exp(x))-y^Tdx \\
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/24/cross-entropy/" rel="next" title="神经网络中的交叉熵的导数计算">
-                <i class="fa fa-chevron-left"></i> 神经网络中的交叉熵的导数计算
+              <a href="/2019/11/17/transform/" rel="next" title="坐标变换中的左乘与右乘">
+                <i class="fa fa-chevron-left"></i> 坐标变换中的左乘与右乘
               </a>
             
           </div>
@@ -377,10 +390,6 @@ dl&=\frac{1}{\vec{1}^Texp(x)}\vec{1}^Td(exp(x))-y^Tdx \\
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/30/opengl-development/" rel="prev" title="OpenGL开发环境配置">
-                OpenGL开发环境配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -503,7 +512,7 @@ dl&=\frac{1}{\vec{1}^Texp(x)}\vec{1}^Td(exp(x))-y^Tdx \\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-OpenCV的摄像机投影模型"><span class="nav-number">1.</span> <span class="nav-text">1. OpenCV的摄像机投影模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-OpenGL中的摄像机投影模型"><span class="nav-number">2.</span> <span class="nav-text">2. OpenGL中的摄像机投影模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用图片"><span class="nav-number">3.</span> <span class="nav-text">引用图片</span></a></li></ol></div>
             
 
           </div>
